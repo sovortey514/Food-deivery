@@ -1,18 +1,23 @@
-import React from 'react'
-import './FoodItem.css'
+import React from 'react';
+import './FoodItem.css';
+import { assets } from '../../assets/assets'; // Change this line to import { assets } from '../../assets/assets';
 
-const FoodItem = ({id,name,price,description,image}) => {
-
+const FoodItem = ({ id, name, price, description, image }) => {
   return (
-    <div className='food-iten'>
+    <div className='food-item'>
       <div className="food-item-img-container">
         <img className='food-item-image' src={image} alt="" />
       </div>
       <div className="food-item-info">
-        <div className="foot-item-name-rating"></div>
+        <div className="food-item-name-rating">
+            <p>{name}</p>
+            <img src={assets.rating_starts} alt="" /> {/* Changed to assets.rating_stars */}
+        </div>
+        <p className="food-item-desc">{description}</p>
+        <p className="food-item-price">${price}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FoodItem
+export default FoodItem;

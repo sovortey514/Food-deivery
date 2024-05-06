@@ -11,9 +11,12 @@ const FoodDisplay = ({ category }) => {
             <div className='food-display' id='food-display'></div>
             <h2>Top dishes near you</h2>
             <div className="food-display-list">
-                {food_list.map((item, index) => (
-                    <FoodItem key={index} id={item.id} description={item.description} price={item.price} image={item.image} />
-                ))}
+                {food_list.map((item, index) => {
+                    if (category === "All" || category === item.category) {
+                        return <FoodItem key={index} id={item.id} description={item.description} price={item.price} image={item.image} />;
+                    }
+                    return null;
+                })}
             </div>
         </div>
     );

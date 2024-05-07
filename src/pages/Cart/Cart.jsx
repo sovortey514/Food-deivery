@@ -18,10 +18,10 @@ const Cart = () => {
         </div>
         <br />
         <hr />
-        {food_list && food_list.map((item, index) => {
+        {food_list.map((item, index) => {
           if (cartItems[item._id] > 0) {
             return (
-              <div key={item._id} className="cart-items-item">
+              <div key={item._id} className="cart-items-item cart-items-item">
                 <p>{item.name}</p>
                 <p>{item.title}</p> {/* Assuming title is the property for the title */}
                 <p>{item.price}</p> {/* Assuming price is the property for the price */}

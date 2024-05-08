@@ -18,15 +18,16 @@ const Cart = () => {
         </div>
         <br />
         <hr />
-        {food_list.map((item, index) => {
-          if (cartItems[item._id] > 0) {
+        {food_list.map(item => {
+          const quantity = cartItems[item._id] || 0; // Ensure quantity defaults to 0 if not in cart
+          if (quantity > 0) {
             return (
               <div key={item._id} className="cart-items-item cart-items-item">
                 <p>{item.name}</p>
-                <p>{item.title}</p> {/* Assuming title is the property for the title */}
-                <p>{item.price}</p> {/* Assuming price is the property for the price */}
-                <p>{cartItems[item._id]}</p>
-                <p>{item.price * cartItems[item._id]}</p>
+                <p>{item.title}</p>
+                <p>{item.price}</p> 
+                <p>{quantity}</p>
+                <p>{item.price * quantity}</p>
                 <button onClick={() => removeFromCart(item._id)}>Remove</button>
               </div>
             )

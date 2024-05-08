@@ -8,26 +8,17 @@ const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
 
     const addToCart = (itemId) => {
-        // If item exists in cart, increase its quantity
-        if (cartItems[itemId]) {
-            setCartItems(prev => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-        } 
-        // If item doesn't exist, add it to cart with quantity 1
-        else {
-            setCartItems(prev => ({ ...prev, [itemId]: 1 }));
-        }
+        setCartItems(prev => ({ ...prev, [String(itemId)]: (prev[itemId] || 0) + 1 }));
     };
 
     const removeFromCart = (itemId) => {
-        if (cartItems[itemId] > 1) {
-            setCartItems(prev => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-        } 
-        // If quantity is 1, remove the item from cart
-        else if (cartItems[itemId] === 1) {
-            const newCartItems = { ...cartItems };
+        const newCartItems = { ...cartItems };
+        if (newCartItems[itemId] > 1) {
+            newCartItems[itemId]--;
+        } else {
             delete newCartItems[itemId];
-            setCartItems(newCartItems);
         }
+        setCartItems(newCartItems);
     };
 
     useEffect(() => {

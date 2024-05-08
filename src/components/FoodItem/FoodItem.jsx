@@ -7,7 +7,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
 
   // Local state to manage item count for this specific FoodItem
-  const [itemCount, setItemCount] = useState(cartItems[id] || 0);
+  const [itemCount, setItemCount] = useState(cartItems[id] ?? 0);
 
   const handleAddToCart = () => {
     addToCart(id);

@@ -1,14 +1,25 @@
-import { MongoClient } from 'mongodb';
+import mysql from 'mysql';
 
 export const connectDB = async () => {
     try {
-        const client = new MongoClient('mongodb+srv://tey-user:PkYa4XBkhqpw4Cly@cluster0.l2kyezy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
-        await client.connect();
-        console.log("DB Connected");
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: '1709',
+            database: 'food-delivery'
+        });
+
+        connection.connect((err) => {
+            if (err) {
+                console.error('Error connecting to MySQL database:', err);
+                return;
+            }
+            console.log('Connected to MySQL database');
+        });
 
         // Don't forget to close the connection when you're done
-        // client.close();
+        // connection.end();
     } catch (error) {
-        console.error("Error connecting to the database:", error);
+        console.error('Error connecting to MySQL database:', error);
     }
 };

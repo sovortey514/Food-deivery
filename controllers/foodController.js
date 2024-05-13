@@ -1,18 +1,20 @@
-import foodModel from '../models/foodModel.js'; // Import your foodModel if not already imported
+import foodModel from '../models/foodModel.js';
 
 const addFood = async (req, res) => {
     try {
-        if (!req.file || !req.file.filename) {
+        if (!req.file || !req.file.filename) { // Corrected condition to check req.file.filename
             return res.status(400).json({ success: false, message: "No file uploaded" });
         }
         
-        const image_filename = req.file.filename;
+        const { name, description, price, category } = req.body;
+
+        const image_filename = req.file.filename; // Accessing req.file.filename
 
         const food = new foodModel({
-            name: req.body.name,
-            description: req.body.description,
-            price: req.body.price,
-            category: req.body.category,
+            name,
+            description,
+            price,
+            category,
             image: image_filename
         });
 
@@ -24,4 +26,14 @@ const addFood = async (req, res) => {
     }
 };
 
-export { addFood };
+const listFood = async (req, res) => {
+    try {
+        const foods = await foodModel.find({});
+        res.json({ success: true, data: foods });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ success: false, message: "Error getting foods" });
+    }
+}
+
+export { addFood, listFood };
